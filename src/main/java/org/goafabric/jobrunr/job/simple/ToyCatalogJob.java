@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 @Component
 public class ToyCatalogJob {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
-    private static final ClassPathResource TOY_CATALOG = new ClassPathResource("catalogdata/toy-catalog.csvs");
+    private static final ClassPathResource TOY_CATALOG = new ClassPathResource("catalogdata/toy-catalog.csv");
 
     public Stream<Toy> reader() throws IOException {
         return Files.lines(TOY_CATALOG.getFile().toPath()).map(line -> process(line.split(",")));
