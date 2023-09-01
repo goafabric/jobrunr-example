@@ -13,11 +13,10 @@ import java.util.stream.Stream;
 @Component
 public class ToyCatalogJob {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
-    private static final String FILE_NAME = "catalogdata/toy-catalog.csv";
+    private static final ClassPathResource TOY_CATALOG = new ClassPathResource("catalogdata/toy-catalog.csvs");
 
     public Stream<Toy> reader() throws IOException {
-        return Files.lines(new ClassPathResource(FILE_NAME).getFile().toPath())
-                .map(line -> process(line.split(",")));
+        return Files.lines(TOY_CATALOG.getFile().toPath()).map(line -> process(line.split(",")));
     }
 
     private Toy process(String[] line) {
