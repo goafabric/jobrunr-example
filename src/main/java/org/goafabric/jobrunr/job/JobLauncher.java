@@ -1,7 +1,7 @@
 package org.goafabric.jobrunr.job;
 
 import org.goafabric.jobrunr.job.simple.SimpleJob;
-import org.goafabric.jobrunr.job.simple.ToyCatalogJob;
+import org.goafabric.jobrunr.job.toy.ToyCatalogJob;
 import org.jobrunr.scheduling.BackgroundJob;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

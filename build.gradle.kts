@@ -39,6 +39,13 @@ dependencies {
 
 	implementation("org.jobrunr:jobrunr-spring-boot-3-starter:6.3.0")
 
+	//persistence
+	implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
+	implementation("com.h2database:h2")
+	implementation("org.postgresql:postgresql")
+	implementation("org.flywaydb:flyway-core")
+
+
 	//test
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
