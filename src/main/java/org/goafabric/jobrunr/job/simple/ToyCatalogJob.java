@@ -15,20 +15,18 @@ import java.util.stream.Stream;
 @Component
 public class ToyCatalogJob {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
+    private static final String FILE_NAME = "catalogdata/toy-catalog.csv";
 
-    public Stream<Toy> read() {
-        log.info("Up & Running from a background Job");
-
-        return loadFile("catalogdata/toy-catalog.csv").stream().map(line -> {
-            var array = line.split(",");
-            return new Toy(array[0], array[1], array[2]);
-        });
-
+    public Stream<Toy> reader() {
+        return loadFile(FILE_NAME).stream().map(line -> process(line.split(",")));
     }
 
-    public void write(Toy toy) {
-        log.info(toy.toString());
+    private Toy process(String[] line) {
+        return new Toy(line[0], line[1], line[2]);
+    }
 
+    public void writer(Toy toy) {
+        log.info(toy.toString());
     }
 
     private static List<String> loadFile(String fileName)  {

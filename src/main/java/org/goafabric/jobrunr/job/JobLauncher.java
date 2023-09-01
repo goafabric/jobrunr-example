@@ -22,7 +22,7 @@ public class JobLauncher implements CommandLineRunner {
         //jobScheduler.enqueue(() -> simpleJob.run());
         //jobScheduler.create(JobBuilder.aJob().withName("test").withAmountOfRetries(3).withDetails(() -> simpleJob.run()));
 
-        BackgroundJob.enqueue(toyCatalogJob.read(), toy -> toyCatalogJob.write(toy));
+        BackgroundJob.enqueue(toyCatalogJob.reader(), toy -> toyCatalogJob.writer(toy));
 
     }
 }
