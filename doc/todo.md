@@ -1,5 +1,3 @@
-#Native Todos
-- Tracing (Security stuff)
-- DurationLogger Aspect + @Circuitbreaker
-- Spring Batch Hashmap Error
-- Elasticsearch
+- what happens if there is an error on a specific step ?
+- make jobrunr terminate after processing
+- native supports (neeeds JobRequest ? https://www.jobrunr.io/en/documentation/background-methods/#via-a-jobrequest)
