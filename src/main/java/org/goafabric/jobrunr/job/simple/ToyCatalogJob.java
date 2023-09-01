@@ -7,9 +7,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Stream;
 
 @Component
@@ -17,11 +15,12 @@ public class ToyCatalogJob {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private static final String FILE_NAME = "catalogdata/toy-catalog.csv";
 
-    public Stream<Toy> reader() {
-        return loadFile(FILE_NAME).stream().map(line -> process(line.split(",")));
+    public Stream<Toy> reader() throws IOException {
+        return new Scanner(new ClassPathResource(FILE_NAME).getFile()).useDelimiter("\n").tokens()
+                .map(line -> process(line.split(","), line));
     }
 
-    private Toy process(String[] line) {
+    private Toy process(String[] line, String lines) {
         return new Toy(line[0], line[1], line[2]);
     }
 
@@ -29,12 +28,4 @@ public class ToyCatalogJob {
         log.info(toy.toString());
     }
 
-    private static List<String> loadFile(String fileName)  {
-        try {
-            return Arrays.asList(new String(new ClassPathResource(fileName).getInputStream()
-                    .readAllBytes(), StandardCharsets.UTF_8).split("\n"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
