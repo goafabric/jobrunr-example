@@ -7,7 +7,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.Scanner;
+import java.nio.file.Files;
 import java.util.stream.Stream;
 
 @Component
@@ -16,11 +16,11 @@ public class ToyCatalogJob {
     private static final String FILE_NAME = "catalogdata/toy-catalog.csv";
 
     public Stream<Toy> reader() throws IOException {
-        return new Scanner(new ClassPathResource(FILE_NAME).getFile()).useDelimiter("\n").tokens()
-                .map(line -> process(line.split(","), line));
+        return Files.lines(new ClassPathResource(FILE_NAME).getFile().toPath())
+                .map(line -> process(line.split(",")));
     }
 
-    private Toy process(String[] line, String lines) {
+    private Toy process(String[] line) {
         return new Toy(line[0], line[1], line[2]);
     }
 
