@@ -1,4 +1,4 @@
-package org.goafabric.jobrunr.job;
+package org.goafabric.jobrunr.job.launcher;
 
 import org.jobrunr.jobs.mappers.JobMapper;
 import org.jobrunr.storage.InMemoryStorageProvider;

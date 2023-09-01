@@ -14,10 +14,6 @@ management:
       exposure:
         include: "health,prometheus,heapdump"
 
-#jobrunr
-org.jobrunr.background-job-server.enabled: "true"
-org.jobrunr.dashboard.enabled: "true"
-
 #logging
 logging.pattern.level: "%5p tenantId=%X{tenantId:-}" #"%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}] tenantId=%X{tenantId:-}"
 
@@ -27,3 +23,7 @@ logging.level.org.springframework: "INFO"
 logging.level.org.goafabric: "INFO"
 logging.level.org.flywaydb.core: "INFO"
 logging.level.org.hibernate.SQL: "INFO"
+
+#jobrunr
+org.jobrunr.background-job-server.enabled: "true"
+org.jobrunr.dashboard.enabled: "true"
