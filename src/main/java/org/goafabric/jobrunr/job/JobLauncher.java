@@ -1,8 +1,8 @@
-package org.goafabric.jobrunr.job.launcher;
+package org.goafabric.jobrunr.job;
 
 import org.goafabric.jobrunr.job.simple.SimpleJob;
+import org.goafabric.jobrunr.job.simple.ToyCatalogJob;
 import org.jobrunr.scheduling.BackgroundJob;
-import org.jobrunr.scheduling.JobScheduler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -14,15 +14,15 @@ public class JobLauncher implements CommandLineRunner {
     private SimpleJob simpleJob;
 
     @Autowired
-    private JobScheduler jobScheduler;
+    private ToyCatalogJob toyCatalogJob;
 
     @Override
     public void run(String... args) throws Exception {
         //jobScheduler.enqueue(() -> System.out.println("Up & Running from a background Job"));
-
         //jobScheduler.enqueue(() -> simpleJob.run());
-        BackgroundJob.enqueue(() -> simpleJob.run());
-
         //jobScheduler.create(JobBuilder.aJob().withName("test").withAmountOfRetries(3).withDetails(() -> simpleJob.run()));
+
+        BackgroundJob.enqueue(toyCatalogJob.read(), toy -> toyCatalogJob.write(toy));
+
     }
 }
