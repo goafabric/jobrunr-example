@@ -1,4 +1,4 @@
-package org.goafabric.jobrunr.domain;
+package org.goafabric.jobrunr.job.person;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
