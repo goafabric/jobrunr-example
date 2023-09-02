@@ -1,7 +1,7 @@
 package org.goafabric.jobrunr.job;
 
 import org.goafabric.jobrunr.job.simple.SimpleJob;
-import org.goafabric.jobrunr.job.toy.ToyCatalogJob;
+import org.goafabric.jobrunr.job.toy.ToyJob;
 import org.jobrunr.scheduling.BackgroundJob;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -14,7 +14,7 @@ public class JobLauncher implements CommandLineRunner {
     private SimpleJob simpleJob;
 
     @Autowired
-    private ToyCatalogJob toyCatalogJob;
+    private ToyJob toyJob;
 
     @Override
     public void run(String... args) throws Exception {
@@ -22,7 +22,7 @@ public class JobLauncher implements CommandLineRunner {
         //jobScheduler.create(JobBuilder.aJob().withName("test").withAmountOfRetries(3).withDetails(() -> simpleJob.run()));
 
         //BackgroundJob.enqueue(() -> simpleJob.run());
-        BackgroundJob.enqueue(toyCatalogJob.reader(), toy -> toyCatalogJob.writer(toy));
+        BackgroundJob.enqueue(toyJob.reader(), toy -> toyJob.writer(toy));
 
     }
 }

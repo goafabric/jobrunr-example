@@ -1,6 +1,5 @@
 package org.goafabric.jobrunr.job.toy;
 
-import org.goafabric.jobrunr.domain.Toy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,7 @@ import java.nio.file.Files;
 import java.util.stream.Stream;
 
 @Component
-public class ToyCatalogJob {
+public class ToyJob {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private static final ClassPathResource TOY_CATALOG = new ClassPathResource("catalogdata/toy-catalog.csv");
 
