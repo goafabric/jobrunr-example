@@ -3,6 +3,7 @@ package org.goafabric.jobrunr.job.person;
 import org.jobrunr.jobs.lambdas.JobRequestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -33,5 +34,9 @@ public class PersonJob implements JobRequestHandler<PersonJobRequest> {
     public void writer(Person person) {
         log.info(person.toString());
         repository.save(person);
+    }
+
+    interface PersonRepository extends CrudRepository<Person, String> {
+        Stream<Person> findAllBy();
     }
 }

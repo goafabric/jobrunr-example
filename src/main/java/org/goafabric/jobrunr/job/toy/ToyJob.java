@@ -3,6 +3,7 @@ package org.goafabric.jobrunr.job.toy;
 import org.jobrunr.jobs.lambdas.JobRequestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 
 import java.nio.file.Files;
@@ -38,5 +39,5 @@ public class ToyJob implements JobRequestHandler<ToyJobRequest> {
         repository.save(toy);
     }
 
-
+    interface ToyRepository extends CrudRepository<Toy, String> {}
 }
