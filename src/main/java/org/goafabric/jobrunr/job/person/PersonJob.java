@@ -20,11 +20,11 @@ public class PersonJob implements JobRequestHandler<PersonJobRequest> {
     }
 
     public void run(PersonJobRequest jobRequest) throws Exception {
-        reader().forEach(this::writer);
+        reader().forEach(item -> writer( process(item) ));
     }
 
     public Stream<Person> reader() throws IOException {
-        return repository.findAllBy().map(this::process);
+        return repository.findAllBy();
     }
 
     private Person process(Person person) {

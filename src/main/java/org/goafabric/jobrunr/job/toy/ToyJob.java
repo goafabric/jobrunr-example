@@ -22,16 +22,16 @@ public class ToyJob implements JobRequestHandler<ToyJobRequest> {
 
     @Override
     public void run(ToyJobRequest jobRequest) throws Exception {
-        reader().forEach(this::writer);
+        reader().forEach(item -> writer( process(item) ));
     }
 
-    public Stream<Toy> reader() throws Exception {
-        return Files.lines(Path.of(ClassLoader.getSystemResource("catalogdata/toy-catalog.csv").toURI()))
-                .map(line -> process(line.split(",")));
+    public Stream<String> reader() throws Exception {
+        return Files.lines(Path.of(ClassLoader.getSystemResource("catalogdata/toy-catalog.csv").toURI()));
     }
 
-    private Toy process(String[] line) {
-        return new Toy(line[0], null, line[1], line[2]);
+    private Toy process(String line) {
+        var tokens = line.split(",");
+        return new Toy(tokens[0], null, tokens[1], tokens[2]);
     }
 
     public void writer(Toy toy) {
