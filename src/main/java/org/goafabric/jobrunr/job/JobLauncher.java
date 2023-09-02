@@ -23,8 +23,8 @@ public class JobLauncher implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         //BackgroundJob.enqueue(() -> simpleJob.run());
-        BackgroundJob.enqueue(toyJob.reader(), toy -> toyJob.writer(toy));
-        BackgroundJob.enqueue(personJob.reader(), person -> personJob.writer(person));
+        BackgroundJob.enqueue(() -> toyJob.run());
+        BackgroundJob.enqueue(() -> personJob.run());
     }
 
     /*

@@ -2,7 +2,6 @@ package org.goafabric.jobrunr.job.toy;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
@@ -13,11 +12,17 @@ import java.util.stream.Stream;
 /* Import from CSV File and write to Database */
 @Component
 public class ToyJob {
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
     private static final ClassPathResource TOY_CATALOG = new ClassPathResource("catalogdata/toy-catalog.csv");
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
+    private final ToyRepository repository;
 
-    @Autowired
-    private ToyRepository repository;
+    public ToyJob(ToyRepository repository) {
+        this.repository = repository;
+    }
+
+    public void run() throws IOException {
+        reader().forEach(this::writer);
+    }
 
     public Stream<Toy> reader() throws IOException {
         return Files.lines(TOY_CATALOG.getFile().toPath()).map(line -> process(line.split(",")));
