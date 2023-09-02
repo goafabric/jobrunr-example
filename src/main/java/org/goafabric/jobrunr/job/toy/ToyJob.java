@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.UUID;
 import java.util.stream.Stream;
 
 /* Import from CSV File and write to Database */
@@ -31,7 +32,7 @@ public class ToyJob implements JobRequestHandler<ToyJobRequest> {
 
     private Toy process(String line) {
         var tokens = line.split(",");
-        return new Toy(tokens[0], null, tokens[1], tokens[2]);
+        return new Toy(UUID.randomUUID().toString(), null, tokens[1], tokens[2]);
     }
 
     public void writer(Toy toy) {
