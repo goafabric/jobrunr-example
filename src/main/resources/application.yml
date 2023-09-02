@@ -37,6 +37,6 @@ logging.level.org.hibernate.SQL: "INFO"
 #jobrunr
 org.jobrunr.background-job-server.enabled: "true"
 org.jobrunr.dashboard.enabled: "true"
-org.jobrunr.dashboard.port: "8000"
+org.jobrunr.dashboard.port: "8001"
 
 org.jobrunr.database.skip-create: "false" #needed for flyway to be turned on
