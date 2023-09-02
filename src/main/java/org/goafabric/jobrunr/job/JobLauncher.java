@@ -1,7 +1,6 @@
 package org.goafabric.jobrunr.job;
 
 import org.goafabric.jobrunr.job.person.PersonJobRequest;
-import org.goafabric.jobrunr.job.toy.ToyJobRequest;
 import org.jobrunr.jobs.mappers.JobMapper;
 import org.jobrunr.scheduling.BackgroundJobRequest;
 import org.jobrunr.storage.InMemoryStorageProvider;
@@ -17,7 +16,7 @@ public class JobLauncher implements CommandLineRunner {
     public void run(String... args) throws Exception {
         //BackgroundJob.enqueue(() -> simpleJob.run());
         BackgroundJobRequest.enqueue(new PersonJobRequest());
-        BackgroundJobRequest.enqueue(new ToyJobRequest());
+        //BackgroundJobRequest.enqueue(new ToyJobRequest());
     }
 
     @Bean
