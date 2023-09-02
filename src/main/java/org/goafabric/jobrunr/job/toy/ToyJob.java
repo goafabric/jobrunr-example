@@ -35,8 +35,7 @@ public class ToyJob implements JobRequestHandler<ToyJobRequest> {
     }
 
     public void writer(Toy toy) {
-        log.info(toy.toString());
-        repository.save(toy);
+        log.info("{}", repository.save(toy));
     }
 
     interface ToyRepository extends CrudRepository<Toy, String> {}

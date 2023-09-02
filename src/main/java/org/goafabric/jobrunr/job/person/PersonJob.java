@@ -24,7 +24,7 @@ public class PersonJob implements JobRequestHandler<PersonJobRequest> {
     }
 
     public Stream<Person> reader() throws IOException {
-        return repository.findAllBy().map(person -> process(person));
+        return repository.findAllBy().map(this::process);
     }
 
     private Person process(Person person) {
@@ -32,8 +32,7 @@ public class PersonJob implements JobRequestHandler<PersonJobRequest> {
     }
 
     public void writer(Person person) {
-        log.info(person.toString());
-        repository.save(person);
+        log.info("{}", repository.save(person));
     }
 
     interface PersonRepository extends CrudRepository<Person, String> {
