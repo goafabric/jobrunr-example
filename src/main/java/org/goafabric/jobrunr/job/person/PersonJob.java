@@ -1,5 +1,6 @@
 package org.goafabric.jobrunr.job.person;
 
+import org.jobrunr.jobs.lambdas.JobRequestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -9,7 +10,7 @@ import java.util.stream.Stream;
 
 /* Anonymize data inside the database */
 @Component
-public class PersonJob {
+public class PersonJob implements JobRequestHandler<PersonJobRequest> {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final PersonRepository repository;
 
@@ -17,7 +18,7 @@ public class PersonJob {
         this.repository = repository;
     }
 
-    public void run() throws IOException {
+    public void run(PersonJobRequest jobRequest) throws Exception {
         reader().forEach(this::writer);
     }
 
@@ -33,5 +34,4 @@ public class PersonJob {
         log.info(person.toString());
         repository.save(person);
     }
-
 }

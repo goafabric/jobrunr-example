@@ -9,11 +9,6 @@ public class SimpleJob {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     public void run() {
-        /*
-        if (true) {
-            throw new IllegalStateException("yo");
-        }
-        */
         log.info("Up & Running from a background Job");
     }
 

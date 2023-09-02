@@ -1,5 +1,6 @@
 package org.goafabric.jobrunr.job.toy;
 
+import org.jobrunr.jobs.lambdas.JobRequestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -11,7 +12,7 @@ import java.util.stream.Stream;
 
 /* Import from CSV File and write to Database */
 @Component
-public class ToyJob {
+public class ToyJob implements JobRequestHandler<ToyJobRequest> {
     private static final ClassPathResource TOY_CATALOG = new ClassPathResource("catalogdata/toy-catalog.csv");
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final ToyRepository repository;
@@ -20,7 +21,8 @@ public class ToyJob {
         this.repository = repository;
     }
 
-    public void run() throws IOException {
+    @Override
+    public void run(ToyJobRequest jobRequest) throws Exception {
         reader().forEach(this::writer);
     }
 
@@ -36,5 +38,6 @@ public class ToyJob {
         log.info(toy.toString());
         repository.save(toy);
     }
+
 
 }
