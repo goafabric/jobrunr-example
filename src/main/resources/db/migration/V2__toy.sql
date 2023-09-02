@@ -1,6 +1,6 @@
 -- catalog tables
 
-CREATE TABLE public.toy_catalog (
+CREATE TABLE masterdata.toy_catalog (
    	id varchar(36) not null
 		constraint pk_toys
 			primary key,

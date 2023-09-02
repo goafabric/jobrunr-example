@@ -40,3 +40,5 @@ org.jobrunr.dashboard.enabled: "true"
 org.jobrunr.dashboard.port: "8001"
 
 org.jobrunr.database.skip-create: "false" #needed for flyway to be turned on
+org.jobrunr.database.table-prefix: "masterdata."
+spring.flyway.default-schema: "masterdata"
