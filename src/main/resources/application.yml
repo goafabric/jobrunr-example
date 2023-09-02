@@ -16,13 +16,22 @@ management:
 
 #persistence
 spring.jpa.hibernate.ddl-auto: "none"
-spring.datasource.url: jdbc:h2:mem:catalog;MODE=POSTGRESQL;DATABASE_TO_LOWER=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE
+spring.datasource.url: jdbc:h2:mem:masterdata;MODE=POSTGRESQL;DATABASE_TO_LOWER=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE
 #spring.datasource.url: jdbc:postgresql://localhost:5432/postgres
 spring.datasource.username: postgres
 spring.datasource.password: postgres
 
 spring.datasource.hikari.maximum-pool-size: "10"
 spring.datasource.hikari.connection-timeout: "10000"
+
+#jobrunr
+org.jobrunr.background-job-server.enabled: "true"
+org.jobrunr.dashboard.enabled: "true"
+org.jobrunr.dashboard.port: "8001"
+
+org.jobrunr.database.skip-create: "false" #needed for flyway to be turned on
+org.jobrunr.database.table-prefix: "masterdata."
+spring.flyway.default-schema: "masterdata"
 
 #logging
 logging.pattern.level: "%5p tenantId=%X{tenantId:-}" #"%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}] tenantId=%X{tenantId:-}"
@@ -34,11 +43,4 @@ logging.level.org.goafabric: "INFO"
 logging.level.org.flywaydb.core: "INFO"
 logging.level.org.hibernate.SQL: "INFO"
 
-#jobrunr
-org.jobrunr.background-job-server.enabled: "true"
-org.jobrunr.dashboard.enabled: "true"
-org.jobrunr.dashboard.port: "8001"
 
-org.jobrunr.database.skip-create: "false" #needed for flyway to be turned on
-org.jobrunr.database.table-prefix: "masterdata."
-spring.flyway.default-schema: "masterdata"
