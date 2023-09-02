@@ -15,7 +15,7 @@ public class JobLauncher implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        //BackgroundJob.enqueue(() -> simpleJob.run());
+        //BackgroundJob.enqueue(() -> new SimpleJob().run());
         BackgroundJobRequest.enqueue(new PersonJobRequest());
         BackgroundJobRequest.enqueue(new ToyJobRequest());
     }
