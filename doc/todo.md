@@ -1,4 +1,4 @@
-- PersonAnonymizer Example that reads from Db
+- schema
 - Step / Stream Reader with Error handling on a step                                                     
 
 - make jobrunr terminate after processing
