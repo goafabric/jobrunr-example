@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.stream.Stream;
 
+/* Anonymize data inside the database */
 @Component
 public class PersonJob {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -22,7 +23,7 @@ public class PersonJob {
     }
 
     private Person process(Person person) {
-        return new Person(person.id(), person.version(), "anonomyzed firstname", "anonomyzed lastname");
+        return new Person(person.id(), person.version(), "anonymized firstname", "anonymized lastname");
     }
 
     public void writer(Person person) {

@@ -1,7 +1,7 @@
 package org.goafabric.jobrunr.job;
 
+import org.goafabric.jobrunr.job.easy.SimpleJob;
 import org.goafabric.jobrunr.job.person.PersonJob;
-import org.goafabric.jobrunr.job.simple.SimpleJob;
 import org.goafabric.jobrunr.job.toy.ToyJob;
 import org.jobrunr.jobs.mappers.JobMapper;
 import org.jobrunr.scheduling.BackgroundJob;
@@ -26,11 +26,8 @@ public class JobLauncher implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        //jobScheduler.enqueue(() -> System.out.println("Up & Running from a background Job"));
-
         //BackgroundJob.enqueue(() -> simpleJob.run());
         //BackgroundJob.enqueue(toyJob.reader(), toy -> toyJob.writer(toy));
-
         BackgroundJob.enqueue(personJob.reader(), person -> personJob.writer(person));
     }
 
