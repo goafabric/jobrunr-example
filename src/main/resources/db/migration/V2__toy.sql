@@ -1,9 +1,6 @@
--- separate schema
-CREATE SCHEMA IF NOT EXISTS masterdata;
-
 -- catalog tables
 
-CREATE TABLE toy_catalog (
+CREATE TABLE public.toy_catalog (
    	id varchar(36) not null
 		constraint pk_toys
 			primary key,

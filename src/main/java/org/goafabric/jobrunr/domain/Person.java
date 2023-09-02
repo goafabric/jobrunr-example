@@ -1,8 +1,11 @@
 package org.goafabric.jobrunr.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Version;
+
 public record Person (
-    String id,
-    String version,
+    @Id String id,
+    @Version String version,
     String firstName,
     String lastName
 ) {}
