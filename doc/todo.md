@@ -2,3 +2,4 @@
 - make jobrunr terminate after processing
 
 - native supports (neeeds JobRequest ? https://www.jobrunr.io/en/documentation/background-methods/#via-a-jobrequest)
+- mongo
