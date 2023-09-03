@@ -1,0 +1,8 @@
+_Values_root_name="example-batch"
+
+_Values_image_repository=goafabric/jobrunr-example
+_Values_image_tag=1.0.1-SNAPSHOT
+
+_Values_service_port=8001
+_Values_resources_entrypoint="java -Xms128M -Xmx128M -cp /app/resources:/app/classes:/app/libs/* org.goafabric.jobrunr.Application"
+_Values_resources_entrypoint_native="/workspace/org.goafabric.jobrunr.Application -Xmx32m"
