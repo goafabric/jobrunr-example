@@ -6,6 +6,7 @@ import org.jobrunr.scheduling.BackgroundJobRequest
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
 import java.time.Instant
+import java.util.*
 
 @Component
 class JobLauncher : CommandLineRunner {
@@ -14,6 +15,8 @@ class JobLauncher : CommandLineRunner {
 
         BackgroundJobRequest.enqueue(PersonJobRequest()) //jobrequest needed for native images
 
-        BackgroundJobRequest.schedule(Instant.now().plusSeconds(2), ToyJobRequest()) //scheduler
+        val jobId = UUID.fromString("cbc5805e-8533-4705-9228-a813cd9ffcde");
+        BackgroundJobRequest.schedule(jobId, Instant.now().plusSeconds(2), ToyJobRequest()) //scheduler
+        BackgroundJobRequest.schedule(jobId, Instant.now().plusSeconds(2), ToyJobRequest()) //scheduler
     }
 }
