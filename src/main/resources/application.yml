@@ -50,4 +50,4 @@ logging.level.org.flywaydb.core: "INFO"
 logging.level.org.hibernate.SQL: "INFO"
 
 #profile
-spring.profiles.active: "mongodb" #mongodb
+spring.profiles.active: "jdbc" #mongodb
