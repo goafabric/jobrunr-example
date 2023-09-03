@@ -29,7 +29,7 @@ org.jobrunr.background-job-server.enabled: "true"
 org.jobrunr.dashboard.enabled: "true"
 org.jobrunr.dashboard.port: "8001"
 
-org.jobrunr.database.skip-create: "false" #needed for flyway to be turned on
+org.jobrunr.database.skip-create: "false" #may be needed for flyway to be turned on and use jobrunr sqls on your own
 org.jobrunr.database.table-prefix: "masterdata."
 spring.flyway.default-schema: "masterdata"
 
