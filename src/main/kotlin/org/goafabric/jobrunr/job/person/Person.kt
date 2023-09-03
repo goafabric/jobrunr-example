@@ -7,9 +7,9 @@ import org.springframework.data.relational.core.mapping.Table
 
 @Table(name = "person", schema = "masterdata")
 @Document("person")
-class Person(
-    @field:Id  val id: String,
-    @field:Version val version: Long,
-    firstName: String,
-    lastName: String
+data class Person(
+    @Id val id: String?,
+    @Version val version: Long?,
+    val firstName: String,
+    val lastName: String
 ) {}
