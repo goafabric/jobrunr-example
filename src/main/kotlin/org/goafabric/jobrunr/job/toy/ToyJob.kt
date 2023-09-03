@@ -20,8 +20,8 @@ class ToyJob(private val repository: ToyRepository) : JobRequestHandler<ToyJobRe
 
     @Throws(Exception::class)
     fun reader(): Stream<String> {
-        return ArrayList<String>().stream();
-        //return Files.lines(Path.of(ClassLoader.getSystemResource("catalogdata/toy-catalog.csv").toURI()))
+        //return ArrayList<String>().stream();
+        return Files.lines(Path.of(ClassLoader.getSystemResource("catalogdata/toy-catalog.csv").toURI()))
     }
 
     private fun processor(line: String): Toy {

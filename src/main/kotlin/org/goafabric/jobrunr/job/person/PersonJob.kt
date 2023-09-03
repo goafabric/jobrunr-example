@@ -22,7 +22,7 @@ class PersonJob(private val repository: PersonRepository) : JobRequestHandler<Pe
     }
 
     private fun processor(person: Person): Person {
-        return Person(person.id, person.version, "anonymized firstname", "anonymized lastname")
+        return Person(id = person.id, version = person.version, firstName = "anonymized firstname", lastName = "anonymized lastname")
     }
 
     fun writer(person: Person) {
