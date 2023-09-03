@@ -19,11 +19,11 @@ public class JobLauncher implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        BackgroundJob.enqueue(() -> new SimpleJob().run());
+        BackgroundJob.enqueue(() -> new SimpleJob().run());  //simple pojo
 
-        BackgroundJobRequest.enqueue(new PersonJobRequest());
+        BackgroundJobRequest.enqueue(new PersonJobRequest()); //jobrequest needed for native images
 
-        BackgroundJobRequest.schedule(Instant.now().plusSeconds(20), new ToyJobRequest());
+        BackgroundJobRequest.schedule(Instant.now().plusSeconds(20), new ToyJobRequest()); //scheduler
 
         //BackgroundJob.scheduleRecurrently(Cron.lastBusinessDayOfTheMonth(10, 30),
           //      () -> System.out.println("Last business day of the month!"));
