@@ -20,14 +20,14 @@ public class PersonJob implements JobRequestHandler<PersonJobRequest> {
     }
 
     public void run(PersonJobRequest jobRequest) throws Exception {
-        reader().forEach(item -> writer( process(item) ));
+        reader().forEach(item -> writer( processor(item) ));
     }
 
     public Stream<Person> reader() throws IOException {
         return repository.findAllBy();
     }
 
-    private Person process(Person person) {
+    private Person processor(Person person) {
         return new Person(person.id(), person.version(), "anonymized firstname", "anonymized lastname");
     }
 

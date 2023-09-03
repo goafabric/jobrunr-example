@@ -23,14 +23,14 @@ public class ToyJob implements JobRequestHandler<ToyJobRequest> {
 
     @Override
     public void run(ToyJobRequest jobRequest) throws Exception {
-        reader().forEach(item -> writer( process(item) ));
+        reader().forEach(item -> writer( processor(item) ));
     }
 
     public Stream<String> reader() throws Exception {
         return Files.lines(Path.of(ClassLoader.getSystemResource("catalogdata/toy-catalog.csv").toURI()));
     }
 
-    private Toy process(String line) {
+    private Toy processor(String line) {
         var tokens = line.split(",");
         return new Toy(UUID.randomUUID().toString(), null, tokens[1], tokens[2]);
     }
