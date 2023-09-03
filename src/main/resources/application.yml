@@ -24,6 +24,12 @@ spring.datasource.password: postgres
 spring.datasource.hikari.maximum-pool-size: "10"
 spring.datasource.hikari.connection-timeout: "10000"
 
+#mongo
+spring.data.mongodb.username: mongodb
+spring.data.mongodb.password: mongodb
+spring.data.mongodb.authentication-database: admin
+spring.data.mongodb.database: core
+
 #jobrunr
 org.jobrunr.background-job-server.enabled: "true"
 org.jobrunr.dashboard.enabled: "true"
@@ -43,4 +49,5 @@ logging.level.org.goafabric: "INFO"
 logging.level.org.flywaydb.core: "INFO"
 logging.level.org.hibernate.SQL: "INFO"
 
-
+#profile
+spring.profiles.active: "jdbc" #mongodb
