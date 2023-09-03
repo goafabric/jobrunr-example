@@ -1,3 +1,2 @@
-- compose file
 - make jobrunr terminate after processing
 - kotlin
