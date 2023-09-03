@@ -16,7 +16,7 @@ public class JobLauncher implements CommandLineRunner {
     public void run(String... args) throws Exception {
         BackgroundJobRequest.enqueue(new PersonJobRequest());
 
-        var jobId = UUID.randomUUID();
+        var jobId = UUID.fromString("cbc5805e-8533-4705-9228-a813cd9ffcde");
         BackgroundJobRequest.schedule(jobId, Instant.now().plusSeconds(2), new ToyJobRequest()); //scheduler
         BackgroundJobRequest.schedule(jobId, Instant.now().plusSeconds(2), new ToyJobRequest()); //scheduler
     }
