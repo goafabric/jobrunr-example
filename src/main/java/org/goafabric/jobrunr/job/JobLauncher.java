@@ -1,10 +1,8 @@
 package org.goafabric.jobrunr.job;
 
-import org.goafabric.jobrunr.job.easy.SimpleJob;
 import org.goafabric.jobrunr.job.person.PersonJobRequest;
 import org.goafabric.jobrunr.job.toy.ToyJobRequest;
 import org.jobrunr.jobs.mappers.JobMapper;
-import org.jobrunr.scheduling.BackgroundJob;
 import org.jobrunr.scheduling.BackgroundJobRequest;
 import org.jobrunr.storage.InMemoryStorageProvider;
 import org.jobrunr.storage.StorageProvider;
@@ -19,7 +17,7 @@ public class JobLauncher implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        BackgroundJob.enqueue(() -> new SimpleJob().run());  //simple pojo
+        //BackgroundJob.enqueue(() -> new SimpleJob().run());  //simple pojo
 
         BackgroundJobRequest.enqueue(new PersonJobRequest()); //jobrequest needed for native images
 
