@@ -1,6 +1,5 @@
 package org.goafabric.jobrunr.job;
 
-import org.goafabric.jobrunr.job.person.PersonJobRequest;
 import org.goafabric.jobrunr.job.toy.ToyJobRequest;
 import org.jobrunr.jobs.mappers.JobMapper;
 import org.jobrunr.scheduling.BackgroundJobRequest;
@@ -10,14 +9,21 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
+import java.time.Instant;
+
 @Component
 public class JobLauncher implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
         //BackgroundJob.enqueue(() -> new SimpleJob().run());
-        BackgroundJobRequest.enqueue(new PersonJobRequest());
-        BackgroundJobRequest.enqueue(new ToyJobRequest());
+
+        //BackgroundJobRequest.enqueue(new PersonJobRequest());
+
+        BackgroundJobRequest.schedule(Instant.now().plusSeconds(5), new ToyJobRequest());
+
+        //BackgroundJob.scheduleRecurrently(Cron.lastBusinessDayOfTheMonth(10, 30),
+          //      () -> System.out.println("Last business day of the month!"));
     }
 
     @Bean
