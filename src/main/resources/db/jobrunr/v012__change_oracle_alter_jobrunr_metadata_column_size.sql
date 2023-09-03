@@ -1,1 +1,0 @@
--- Empty migration so all databases follow the same numbering;

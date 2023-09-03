@@ -1,3 +1,4 @@
 - compose file
 - make jobrunr terminate after processing
 - native support for metadata write 
+- kotlin
