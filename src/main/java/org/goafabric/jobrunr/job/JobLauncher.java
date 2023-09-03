@@ -3,9 +3,13 @@ package org.goafabric.jobrunr.job;
 import org.goafabric.jobrunr.job.easy.SimpleJob;
 import org.goafabric.jobrunr.job.person.PersonJobRequest;
 import org.goafabric.jobrunr.job.toy.ToyJobRequest;
+import org.jobrunr.jobs.mappers.JobMapper;
 import org.jobrunr.scheduling.BackgroundJob;
 import org.jobrunr.scheduling.BackgroundJobRequest;
+import org.jobrunr.storage.InMemoryStorageProvider;
+import org.jobrunr.storage.StorageProvider;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
@@ -26,13 +30,11 @@ public class JobLauncher implements CommandLineRunner {
     }
 
     //in memory storage currently needs to be enabled for native image support
-    /*
     @Bean
     public StorageProvider storageProvider(JobMapper jobMapper) {
         InMemoryStorageProvider storageProvider = new InMemoryStorageProvider();
         storageProvider.setJobMapper(jobMapper);
         return storageProvider;
     }
-    */
 
 }
