@@ -35,6 +35,7 @@ dependencies {
 		annotationProcessor("org.mapstruct:mapstruct-processor:1.5.4.Final")
 		implementation("io.github.resilience4j:resilience4j-spring-boot3:2.0.2")
 	}
+	implementation(kotlin("stdlib-jdk8"))
 }
 
 dependencies {

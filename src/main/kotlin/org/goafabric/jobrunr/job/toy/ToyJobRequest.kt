@@ -1,11 +1,10 @@
-package org.goafabric.jobrunr.job.toy;
+package org.goafabric.jobrunr.job.toy
 
-import org.jobrunr.jobs.lambdas.JobRequest;
-import org.jobrunr.jobs.lambdas.JobRequestHandler;
+import org.jobrunr.jobs.lambdas.JobRequest
+import org.jobrunr.jobs.lambdas.JobRequestHandler
 
-public class ToyJobRequest implements JobRequest {
-    @Override
-    public Class<? extends JobRequestHandler> getJobRequestHandler() {
-        return ToyJob.class;
+class ToyJobRequest : JobRequest {
+    override fun getJobRequestHandler(): Class<out JobRequestHandler<*>?> {
+        return ToyJob::class.java
     }
 }
