@@ -1,5 +1,6 @@
 # 1.0.1
 - job metadata tables native image support
+- job names added
 - compose file added
 - kotlin branch added
 
