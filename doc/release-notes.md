@@ -1,3 +1,5 @@
+# 1.0.2
+
 # 1.0.1
 - job metadata tables native image support
 - job names added
