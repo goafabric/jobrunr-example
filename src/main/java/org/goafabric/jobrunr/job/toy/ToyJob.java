@@ -1,5 +1,6 @@
 package org.goafabric.jobrunr.job.toy;
 
+import org.jobrunr.jobs.annotations.Job;
 import org.jobrunr.jobs.lambdas.JobRequestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,7 @@ public class ToyJob implements JobRequestHandler<ToyJobRequest> {
     }
 
     @Override
+    @Job(name = "ToyJob")
     public void run(ToyJobRequest jobRequest) throws Exception {
         reader().forEach(item -> writer( processor(item) ));
     }
