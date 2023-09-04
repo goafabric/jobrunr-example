@@ -48,4 +48,4 @@ logging.level.org.hibernate.SQL: "INFO"
 
 #profile
 spring.profiles.active: "jdbc" #mongodb
-org.jobrunr.database.skip-create: "false"
+org.jobrunr.database.skip-create: "true"
