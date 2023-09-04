@@ -26,7 +26,6 @@ spring.datasource.hikari.connection-timeout: "10000"
 
 #mongo
 spring.data.mongodb.uri: "mongodb://mongodb:mongodb@localhost:27017/masterdata?authSource=admin"
-#spring.data.mongodb.database: masterdata
 
 #jobrunr
 org.jobrunr.background-job-server.enabled: "true"
@@ -47,4 +46,4 @@ logging.level.org.flywaydb.core: "INFO"
 logging.level.org.hibernate.SQL: "INFO"
 
 #profile
-spring.profiles.active: "mongodb" #mongodb
+spring.profiles.active: "jdbc" #mongodb
