@@ -1,6 +1,7 @@
 package org.goafabric.jobrunr.configuration;
 
 import org.goafabric.jobrunr.Application;
+import org.jobrunr.spring.autoconfigure.JobRunrProperties;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.jdbc.JdbcRepositoriesAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -14,4 +15,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class, JdbcRepositoriesAutoConfiguration.class})
 @EnableMongoRepositories(considerNestedRepositories = true, basePackageClasses = Application.class)
 public class MongoConfiguration {
+    public MongoConfiguration(JobRunrProperties jobRunrProperties) {
+        jobRunrProperties.getDatabase().setSkipCreate(false);
+    }
 }
