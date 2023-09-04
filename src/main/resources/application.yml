@@ -35,7 +35,6 @@ org.jobrunr.background-job-server.enabled: "true"
 org.jobrunr.dashboard.enabled: "true"
 org.jobrunr.dashboard.port: "8001"
 
-org.jobrunr.database.skip-create: "true" #may be needed for flyway to be turned on and use jobrunr sqls on your own
 org.jobrunr.database.table-prefix: "masterdata."
 spring.flyway.default-schema: "masterdata"
 
@@ -51,3 +50,4 @@ logging.level.org.hibernate.SQL: "INFO"
 
 #profile
 spring.profiles.active: "jdbc" #mongodb
+org.jobrunr.database.skip-create: "true"
