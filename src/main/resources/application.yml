@@ -25,7 +25,7 @@ spring.datasource.hikari.maximum-pool-size: "10"
 spring.datasource.hikari.connection-timeout: "10000"
 
 #mongo
-spring.data.mongodb.uri: "mongodb://mongodb:mongodb@localhost/admin"
+spring.data.mongodb.uri: "mongodb://mongodb:mongodb@localhost:27017/admin"
 spring.data.mongodb.database: masterdata
 
 #jobrunr
@@ -40,12 +40,12 @@ spring.flyway.default-schema: "masterdata"
 logging.pattern.level: "%5p tenantId=%X{tenantId:-}" #"%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}] tenantId=%X{tenantId:-}"
 
 logging.level.root: "WARN"
-logging.level.org.springframework: "DEBUG"
+logging.level.org.springframework: "INFO"
 
 logging.level.org.goafabric: "INFO"
 logging.level.org.flywaydb.core: "INFO"
 logging.level.org.hibernate.SQL: "INFO"
 
 #profile
-spring.profiles.active: "mongodb" #mongodb
+spring.profiles.active: "jdbc" #mongodb
 org.jobrunr.database.skip-create: "false"

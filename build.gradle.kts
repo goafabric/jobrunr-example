@@ -48,6 +48,7 @@ dependencies {
 
 	//mongodb
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
+	//developmentOnly("de.flapdoodle.embed:de.flapdoodle.embed.mongo.spring30x:4.7.0")
 
 	//test
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
