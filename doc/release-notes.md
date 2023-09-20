@@ -1,4 +1,5 @@
 # 1.0.2
+- java21 upgrade
 
 # 1.0.1
 - job metadata tables native image support
