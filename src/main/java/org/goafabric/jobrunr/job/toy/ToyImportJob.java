@@ -14,17 +14,17 @@ import java.util.stream.Stream;
 
 /* Import from CSV File and write to Database */
 @Component
-public class ToyJob implements JobRequestHandler<ToyJobRequest> {
+public class ToyImportJob implements JobRequestHandler<ToyImportJobRequest> {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final ToyRepository repository;
 
-    public ToyJob(ToyRepository repository) {
+    public ToyImportJob(ToyRepository repository) {
         this.repository = repository;
     }
 
     @Override
     @Job(name = "ToyJob")
-    public void run(ToyJobRequest jobRequest) throws Exception {
+    public void run(ToyImportJobRequest jobRequest) throws Exception {
         reader().forEach(item -> writer( processor(item) ));
     }
 

@@ -12,17 +12,17 @@ import java.util.stream.Stream;
 
 /* Anonymize data inside the database */
 @Component
-public class PersonJob implements JobRequestHandler<PersonJobRequest> {
+public class PersonAnonymizerJob implements JobRequestHandler<PersonAnonymizerJobRequest> {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final PersonRepository repository;
 
-    public PersonJob(PersonRepository repository) {
+    public PersonAnonymizerJob(PersonRepository repository) {
         this.repository = repository;
     }
 
     @Job(name = "PersonJob")
     @Override
-    public void run(PersonJobRequest jobRequest) throws Exception {
+    public void run(PersonAnonymizerJobRequest jobRequest) throws Exception {
         reader().forEach(item -> writer( processor(item) ));
     }
 
