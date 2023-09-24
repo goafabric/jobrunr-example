@@ -4,12 +4,14 @@ import org.goafabric.jobrunr.job.person.PersonAnonymizerJobRequest;
 import org.goafabric.jobrunr.job.toy.ToyImportJobRequest;
 import org.jobrunr.scheduling.BackgroundJobRequest;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 import java.util.UUID;
 
 @Component
+@EnableScheduling
 public class JobLauncher implements CommandLineRunner {
 
     @Override
