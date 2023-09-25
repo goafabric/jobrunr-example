@@ -13,6 +13,11 @@ import java.util.UUID;
 @Component
 @EnableScheduling
 public class JobLauncher implements CommandLineRunner {
+    private final JobFinisher jobFinisher;
+
+    public JobLauncher(JobFinisher jobFinisher) {
+        this.jobFinisher = jobFinisher;
+    }
 
     @Override
     public void run(String... args) throws Exception {
@@ -21,6 +26,12 @@ public class JobLauncher implements CommandLineRunner {
         var jobId = UUID.fromString("cbc5805e-8533-4705-9228-a813cd9ffcde");
         BackgroundJobRequest.schedule(jobId, Instant.now().plusSeconds(2), new ToyImportJobRequest()); //scheduler
         BackgroundJobRequest.schedule(jobId, Instant.now().plusSeconds(2), new ToyImportJobRequest()); //scheduler
+
+        jobFinisher.waitForIt();
     }
+
+
+
+
 
 }
