@@ -3,6 +3,7 @@ package org.goafabric.jobrunr.job;
 import org.goafabric.jobrunr.job.person.PersonAnonymizerJobRequest;
 import org.goafabric.jobrunr.job.toy.ToyImportJobRequest;
 import org.jobrunr.scheduling.BackgroundJobRequest;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Component;
@@ -13,9 +14,11 @@ import java.util.UUID;
 @Component
 @EnableScheduling
 public class JobLauncher implements CommandLineRunner {
+    private final Boolean schedulerEnabled;
     private final JobFinisher jobFinisher;
 
-    public JobLauncher(JobFinisher jobFinisher) {
+    public JobLauncher(@Value("${scheduler.enabled}") Boolean schedulerEnabled, JobFinisher jobFinisher) {
+        this.schedulerEnabled = schedulerEnabled;
         this.jobFinisher = jobFinisher;
     }
 
@@ -27,7 +30,9 @@ public class JobLauncher implements CommandLineRunner {
         BackgroundJobRequest.schedule(jobId, Instant.now().plusSeconds(2), new ToyImportJobRequest()); //scheduler
         BackgroundJobRequest.schedule(jobId, Instant.now().plusSeconds(2), new ToyImportJobRequest()); //scheduler
 
-        jobFinisher.waitForIt();
+        if (!schedulerEnabled) {
+            jobFinisher.terminateWhenFinished();
+        }
     }
 
 
