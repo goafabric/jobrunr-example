@@ -1,1 +1,2 @@
 - make jobrunr terminate after processing
+- make job with the same jobparam not start twice
