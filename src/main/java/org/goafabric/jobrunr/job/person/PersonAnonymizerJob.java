@@ -8,6 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.UUID;
 import java.util.stream.Stream;
 
 /* Anonymize data inside the database */
@@ -23,6 +24,7 @@ public class PersonAnonymizerJob implements JobRequestHandler<PersonAnonymizerJo
     @Job(name = "PersonJob")
     @Override
     public void run(PersonAnonymizerJobRequest jobRequest) throws Exception {
+        demoDataImport();
         reader().forEach(item -> writer( processor(item) ));
     }
 
@@ -36,6 +38,12 @@ public class PersonAnonymizerJob implements JobRequestHandler<PersonAnonymizerJo
 
     public void writer(Person person) {
         log.info("{}", repository.save(person));
+    }
+
+    public void demoDataImport() {
+        repository.save(new Person(UUID.randomUUID().toString(), null, "Homer", "Simpson"));
+        repository.save(new Person(UUID.randomUUID().toString(), null, "Bart", "Simpson"));
+        repository.save(new Person(UUID.randomUUID().toString(), null, "Monty", "Burns"));
     }
 
     interface PersonRepository extends CrudRepository<Person, String> {
