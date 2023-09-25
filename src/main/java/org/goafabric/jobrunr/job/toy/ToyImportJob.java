@@ -25,6 +25,7 @@ public class ToyImportJob implements JobRequestHandler<ToyImportJobRequest> {
     @Override
     @Job(name = "ToyJob")
     public void run(ToyImportJobRequest jobRequest) throws Exception {
+        System.out.println("started !");
         reader().forEach(item -> writer( processor(item) ));
     }
 
