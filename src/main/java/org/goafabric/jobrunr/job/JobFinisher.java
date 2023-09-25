@@ -19,11 +19,11 @@ public class JobFinisher {
 
     public void terminateWhenFinished() {
         var future = CompletableFuture.runAsync(() -> {
-            var jobCount = 1L;
+            var jobCount = -1L;
             do {
                 var jobStats = storageProvider.getJobStats();
                 jobCount = jobStats.getEnqueued() + jobStats.getScheduled() + jobStats.getProcessing();
-                try { Thread.sleep(1000); } catch (InterruptedException e) { throw new RuntimeException(e); }
+                try { Thread.sleep(100); } catch (InterruptedException e) { throw new RuntimeException(e); }
             } while (jobCount > 0 );
         });
         future.join();
