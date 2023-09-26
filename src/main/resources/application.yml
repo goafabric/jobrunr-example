@@ -25,8 +25,11 @@ spring.datasource.hikari.maximum-pool-size: "10"
 spring.datasource.hikari.connection-timeout: "10000"
 
 #mongo
+spring.autoconfigure.exclude: ${mongodb.autoconfiguration}
 spring.data.mongodb.uri: "mongodb://mongodb:mongodb@localhost:27017/masterdata?authSource=admin"
-#spring.profiles.active: "mongodb"
+
+mongodb.autoconfiguration: "org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration, org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration, org.springframework.boot.autoconfigure.data.mongo.MongoRepositoriesAutoConfiguration"
+jdbc.autoconfiguration: "org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.data.jdbc.JdbcRepositoriesAutoConfiguration"
 
 #jobrunr
 org.jobrunr.background-job-server.enabled: "true"
@@ -35,7 +38,6 @@ org.jobrunr.dashboard.port: "8001"
 
 org.jobrunr.database.table-prefix: "masterdata."
 spring.flyway.default-schema: "masterdata"
-
 scheduler.enabled: "false"
 
 #logging

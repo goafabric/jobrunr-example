@@ -4,7 +4,6 @@ import org.jobrunr.jobs.annotations.Job;
 import org.jobrunr.jobs.lambdas.JobRequestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 
 import java.nio.file.Files;
@@ -42,5 +41,4 @@ public class ToyImportJob implements JobRequestHandler<ToyImportJobRequest> {
         log.info("{}", repository.save(toy));
     }
 
-    interface ToyRepository extends CrudRepository<Toy, String> {}
 }

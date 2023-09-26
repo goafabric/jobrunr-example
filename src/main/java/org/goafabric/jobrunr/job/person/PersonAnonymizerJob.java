@@ -4,7 +4,6 @@ import org.jobrunr.jobs.annotations.Job;
 import org.jobrunr.jobs.lambdas.JobRequestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -46,7 +45,4 @@ public class PersonAnonymizerJob implements JobRequestHandler<PersonAnonymizerJo
         repository.save(new Person(UUID.randomUUID().toString(), null, "Monty", "Burns"));
     }
 
-    interface PersonRepository extends CrudRepository<Person, String> {
-        Stream<Person> findAllBy();
-    }
 }
