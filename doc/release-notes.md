@@ -1,4 +1,5 @@
 # 1.0.3
+- upgrade to boot 3.1.4
 
 # 1.0.2
 - java21 upgrade
