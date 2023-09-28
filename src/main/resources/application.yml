@@ -25,19 +25,20 @@ spring.datasource.hikari.maximum-pool-size: "10"
 spring.datasource.hikari.connection-timeout: "10000"
 
 #mongo
-spring.data.mongodb.username: mongodb
-spring.data.mongodb.password: mongodb
-spring.data.mongodb.authentication-database: admin
-spring.data.mongodb.database: core
+spring.autoconfigure.exclude: ${mongodb.autoconfiguration}
+spring.data.mongodb.uri: "mongodb://mongodb:mongodb@localhost:27017/masterdata?authSource=admin"
+
+mongodb.autoconfiguration: "org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration, org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration, org.springframework.boot.autoconfigure.data.mongo.MongoRepositoriesAutoConfiguration"
+jdbc.autoconfiguration: "org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.data.jdbc.JdbcRepositoriesAutoConfiguration"
 
 #jobrunr
 org.jobrunr.background-job-server.enabled: "true"
 org.jobrunr.dashboard.enabled: "true"
 org.jobrunr.dashboard.port: "8001"
 
-org.jobrunr.database.skip-create: "true" #may be needed for flyway to be turned on and use jobrunr sqls on your own
 org.jobrunr.database.table-prefix: "masterdata."
 spring.flyway.default-schema: "masterdata"
+scheduler.enabled: "false"
 
 #logging
 logging.pattern.level: "%5p tenantId=%X{tenantId:-}" #"%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}] tenantId=%X{tenantId:-}"
@@ -48,6 +49,3 @@ logging.level.org.springframework: "INFO"
 logging.level.org.goafabric: "INFO"
 logging.level.org.flywaydb.core: "INFO"
 logging.level.org.hibernate.SQL: "INFO"
-
-#profile
-spring.profiles.active: "jdbc" #mongodb

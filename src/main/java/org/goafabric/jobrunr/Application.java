@@ -1,6 +1,5 @@
 package org.goafabric.jobrunr;
 
-import org.springframework.aot.hint.MemberCategory;
 import org.springframework.aot.hint.RuntimeHints;
 import org.springframework.aot.hint.RuntimeHintsRegistrar;
 import org.springframework.boot.CommandLineRunner;
@@ -32,7 +31,6 @@ public class Application {
         @Override
         public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
             hints.resources().registerPattern("catalogdata/*.csv");
-            hints.reflection().registerType(java.util.concurrent.CopyOnWriteArrayList.class, MemberCategory.INVOKE_DECLARED_CONSTRUCTORS);
         }
     }
 

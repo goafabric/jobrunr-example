@@ -1,1 +1,0 @@
-- make jobrunr terminate after processing
