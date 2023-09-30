@@ -29,7 +29,4 @@ class PersonJob(private val repository: PersonRepository) : JobRequestHandler<Pe
         log.info("{}", repository.save(person))
     }
 
-    interface PersonRepository : CrudRepository<Person?, String?> {
-        fun findAllBy(): Stream<Person>
-    }
 }

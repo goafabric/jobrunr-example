@@ -32,5 +32,4 @@ class ToyJob(private val repository: ToyRepository) : JobRequestHandler<ToyJobRe
         log.info("{}", repository.save(toy))
     }
 
-    interface ToyRepository : CrudRepository<Toy?, String?>
 }
