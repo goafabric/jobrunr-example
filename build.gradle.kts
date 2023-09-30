@@ -33,7 +33,7 @@ dependencies {
 		implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
 		implementation("org.mapstruct:mapstruct:1.5.5.Final")
 		annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
-		implementation("io.github.resilience4j:resilience4j-spring-boot3:2.1.0")
+		implementation("io.github.resilience4j:resilience4j-spring-boot3:2.0.2")
 	}
 	implementation(kotlin("stdlib-jdk8"))
 }
