@@ -1,5 +1,6 @@
 # 1.0.3
-- upgrade to boot 3.1.4
+- upgrade to boot 3.2.4
+- release plugin added
 
 # 1.0.2
 - java21 upgrade
