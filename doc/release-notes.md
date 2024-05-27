@@ -1,3 +1,8 @@
+# 1.0.3
+- upgrade to boot 3.3.0
+- upgrade to jobrunr 7.1.2
+- release plugin added
+
 # 1.0.2
 - java21 upgrade
 - mongodb added

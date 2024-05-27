@@ -1,21 +1,22 @@
 import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
 
-group = "org.goafabric"
-version = "1.0.2-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_17
+val group: String by project
+val version: String by project
+java.sourceCompatibility = JavaVersion.VERSION_21
 
 val dockerRegistry = "goafabric"
-val graalvmBuilderImage = "ghcr.io/graalvm/native-image-community:21.0.0"
-val baseImage = "ibm-semeru-runtimes:open-20.0.1_9-jre-focal@sha256:f1a10da50d02f51e79e3c9604ed078a39c19cd2711789cab7aa5d11071482a7e"
-jacoco.toolVersion = "0.8.9"
+val nativeBuilder = "dashaun/builder:20240403"
+val baseImage = "ibm-semeru-runtimes:open-21.0.1_12-jre-focal@sha256:24d43669156684f7bc28536b22537a7533ab100bf0a5a89702b987ebb53215be"
 
 plugins {
 	java
 	jacoco
-	id("org.springframework.boot") version "3.1.3"
-	id("io.spring.dependency-management") version "1.1.0"
-	id("org.graalvm.buildtools.native") version "0.9.23"
-	id("com.google.cloud.tools.jib") version "3.3.2"
+	id("org.springframework.boot") version "3.3.0"
+	id("io.spring.dependency-management") version "1.1.5"
+	id("org.graalvm.buildtools.native") version "0.10.2"
+
+	id("com.google.cloud.tools.jib") version "3.4.2"
+	id("net.researchgate.release") version "3.0.2"
 }
 
 repositories {
@@ -37,7 +38,7 @@ dependencies {
 	//web
 	implementation("org.springframework.boot:spring-boot-starter")
 
-	implementation("org.jobrunr:jobrunr-spring-boot-3-starter:6.3.1")
+	implementation("org.jobrunr:jobrunr-spring-boot-3-starter:7.1.2")
 
 	//persistence
 	implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
@@ -45,6 +46,7 @@ dependencies {
 	implementation("com.h2database:h2")
 	implementation("org.postgresql:postgresql")
 	implementation("org.flywaydb:flyway-core")
+	implementation("org.flywaydb:flyway-database-postgresql")
 
 	//mongodb
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
@@ -69,22 +71,21 @@ jib {
 	from.platforms.set(listOf(amd64, arm64))
 }
 
-buildscript { dependencies { classpath("com.google.cloud.tools:jib-native-image-extension-gradle:0.1.0") }}
-tasks.register("dockerImageNativeNoTest") {group = "build"; dependsOn("bootJar")
-	jib.to.image = ""
-	doFirst {
-		exec { commandLine(
-			"docker", "run", "--rm", "--mount", "type=bind,source=${projectDir}/build,target=/build", "--entrypoint", "/bin/bash", graalvmBuilderImage, "-c", """ mkdir -p /build/native/nativeCompile && cp /build/libs/*.jar /build/native/nativeCompile && cd /build/native/nativeCompile && jar -xvf *.jar &&
-			native-image -J-Xmx5000m -march=compatibility -H:Name=application $([[ -f META-INF/native-image/argfile ]] && echo @META-INF/native-image/argfile) -cp .:BOOT-INF/classes:$(ls -d -1 "/build/native/nativeCompile/BOOT-INF/lib/"*.* | tr "\n" ":") && /build/native/nativeCompile/application -check-integrity """
-		)}
-		jib.from.image = "ubuntu:22.04"
-		jib.to.image = "${dockerRegistry}/${project.name}-native" + (if (System.getProperty("os.arch").equals("aarch64")) "-arm64v8" else "") + ":${project.version}"
-		jib.pluginExtensions { pluginExtension {properties = mapOf("imageName" to "application"); implementation = "com.google.cloud.tools.jib.gradle.extension.nativeimage.JibNativeImageExtension" }}
+tasks.register("dockerImageNative") { group = "build"; dependsOn("bootBuildImage") }
+tasks.named<BootBuildImage>("bootBuildImage") {
+	val nativeImageName = "${dockerRegistry}/${project.name}-native" + (if (System.getProperty("os.arch").equals("aarch64")) "-arm64v8" else "") + ":${project.version}"
+	builder.set(nativeBuilder)
+	imageName.set(nativeImageName)
+	environment.set(mapOf("BP_NATIVE_IMAGE" to "true", "BP_JVM_VERSION" to "21", "BP_NATIVE_IMAGE_BUILD_ARGUMENTS" to "-J-Xmx5000m -march=compatibility"))
+	doLast {
+		exec { commandLine("/bin/sh", "-c", "docker run --rm $nativeImageName -check-integrity") }
+		exec { commandLine("/bin/sh", "-c", "docker push $nativeImageName") }
 	}
-	finalizedBy("jib")
 }
-tasks.register("dockerImageNative") {group = "build"; dependsOn("clean", "dockerImageNativeNoTest"); doLast { exec { commandLine("docker", "run", "--rm", "--pull", "always", "${dockerRegistry}/${project.name}-native" + (if (System.getProperty("os.arch").equals("aarch64")) "-arm64v8" else "") + ":${project.version}", "-check-integrity") } } }
 
-graalvmNative { //https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html#configuration-options
-	binaries.named("main") { quickBuild.set(true) }
+graalvmNative { binaries.named("main") { quickBuild.set(true) } }
+
+configure<net.researchgate.release.ReleaseExtension> {
+	buildTasks.set(listOf("build", "test", "jib", "dockerImageNative"))
+	tagTemplate.set("v${version}".replace("-SNAPSHOT", ""))
 }
