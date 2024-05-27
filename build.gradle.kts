@@ -38,7 +38,7 @@ dependencies {
 	//web
 	implementation("org.springframework.boot:spring-boot-starter")
 
-	implementation("org.jobrunr:jobrunr-spring-boot-3-starter:6.3.1")
+	implementation("org.jobrunr:jobrunr-spring-boot-3-starter:7.1.2")
 
 	//persistence
 	implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
