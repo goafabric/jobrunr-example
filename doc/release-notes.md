@@ -1,5 +1,5 @@
 # 1.0.3
-- upgrade to boot 3.2.4
+- upgrade to boot 3.3.0
 - release plugin added
 
 # 1.0.2
