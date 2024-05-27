@@ -1,3 +1,5 @@
+# 1.0.4
+
 # 1.0.3
 - upgrade to boot 3.3.0
 - upgrade to jobrunr 7.1.2
